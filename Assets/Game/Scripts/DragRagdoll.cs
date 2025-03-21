@@ -1,4 +1,6 @@
 using DG.Tweening;
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class DragRagdoll : MonoBehaviour
@@ -6,31 +8,41 @@ public class DragRagdoll : MonoBehaviour
     [SerializeField] Rigidbody selectedRb;
     [SerializeField] float followSpeed = 10f;
     [SerializeField] LineRenderer lineRenderer;
-    [SerializeField] GameObject selectedObject;
-
+    [SerializeField] internal CharacterBehaviour character;
     [SerializeField] LayerMask groundMask;
     [SerializeField] Vector3 offset;
-
+    [SerializeField] GameObject selectedSeat;
     private bool isDragging = false;
 
+    public void SetCharacter(CharacterBehaviour characterBehaviour)
+    {
+        character = characterBehaviour;
+        selectedRb = character.head;
+        character.OpenRagdoll();
+        lineRenderer.positionCount = 2;
+        isDragging = true;
+        selectedRb.isKinematic = true;
+        selectedRb.transform.DORotate(new Vector3(-30, 180, 0), .2f);
+    }
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            lineRenderer.positionCount = 2;
-            isDragging = true;
-            selectedRb.isKinematic = true;
-            selectedRb.transform.DORotate(new Vector3(-30, 180, 0), .2f);
-        }
         if (Input.GetMouseButtonUp(0))
         {
+            StartCoroutine(AnimatorActivate());
             lineRenderer.positionCount = 0;
             isDragging = false;
             selectedRb.isKinematic = false;
-            selectedObject = null;
         }
     }
-
+    IEnumerator AnimatorActivate()
+    {
+        yield return new WaitForSeconds(0f);
+        if (!selectedSeat)
+            Destroy(character.gameObject);
+        else
+            StartCoroutine(character.BlendToAnimation(selectedSeat));
+        selectedSeat = null;
+    }
     void FixedUpdate()
     {
         if (isDragging)
@@ -62,7 +74,7 @@ public class DragRagdoll : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundMask))
         {
-            selectedObject = hit.collider.gameObject;
+            selectedSeat = hit.collider.gameObject;
             return hit.point; // Çarptýðý noktanýn dünya pozisyonu
         }
 
