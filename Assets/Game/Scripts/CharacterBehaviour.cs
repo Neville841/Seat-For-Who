@@ -2,15 +2,27 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR;
+using UnityEngine.Events;
+using UnityEngine.TextCore.Text;
 
 public class CharacterBehaviour : MonoBehaviour
 {
+    internal UnityAction completeEvent;
+    [SerializeField] internal GameObject ghostCloth, realCloth;
+
     [SerializeField] internal Animator animatedChar, ragdollChar;
-    [SerializeField] List<Transform> ragdollBones;
-    [SerializeField] private float blendDuration = 0.5f;
-    [SerializeField] Transform hips;
     [SerializeField] internal Rigidbody head;
+    [SerializeField] internal CharacterSO characterSO;
+
+    [SerializeField] List<Transform> ragdollBones;
+    [SerializeField] Transform hips;
+
+    [SerializeField] private float blendDuration = 0.5f;
+    [ContextMenu("GhostClothSet")]
+    public void GhostClothSet()
+    {
+        GhostClothingSync ghostCloth = new GhostClothingSync(realCloth, this.ghostCloth);
+    }
     public void OpenRagdoll()
     { // Karakterin tüm kemiklerini al ve listeye ekle
         foreach (Rigidbody rb in GetComponentsInChildren<Rigidbody>())
@@ -24,15 +36,30 @@ public class CharacterBehaviour : MonoBehaviour
             bone.GetComponent<Rigidbody>().isKinematic = false;
         }
     }
-    public IEnumerator BlendToAnimation(GameObject seat)
+    public void GhostBody(Seat seat)
     {
-        animatedChar.SetBool("Sit", true);
-        ragdollChar.SetBool("Sit", true);
+        if (seat)
+        {
+            ghostCloth.SetActive(true);
+            animatedChar.transform.position = seat.characterPos.position;
+        }
+        else
+        {
+            ghostCloth.SetActive(false);
+        }
+    }
+    public IEnumerator BlendToAnimation(Seat seat)
+    {
+        if (seat.seatType != characterSO.SeatType)
+        {
+            Destroy(gameObject);
+            yield break;
+        }
+        animatedChar.transform.localPosition = Vector3.zero;
         float elapsedTime = 0f;
         transform.position = hips.transform.position;
         hips.localPosition = Vector3.zero;
-        Vector3 seatPos = seat.transform.position; seatPos.y = 0.28f; seatPos.z -= 0.34f;
-        transform.DOMove(seatPos, .5f);
+        transform.DOMove(seat.characterPos.position, .5f);
         while (elapsedTime < .75f)
         {
             elapsedTime += Time.deltaTime;
@@ -51,7 +78,10 @@ public class CharacterBehaviour : MonoBehaviour
             }
             yield return null;
         }
+        seat.SetCharacter(this);
         ragdollChar.enabled = true;
+        ragdollChar.Play("Sit");
+        completeEvent.Invoke();
     }
 
     private Transform GetMatchingAnimatedBone(Transform ragdollBone)

@@ -3,7 +3,13 @@ guid: 2919cfdb2a9d38743a0f0e21dda59d59
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - character: {instanceID: 0}
+  - dragRagdoll: {instanceID: 0}
+  - characterSO: {instanceID: 0}
+  - infoTextParent: {instanceID: 0}
+  - infoText: {fileID: 8979391876899172437, guid: 939d9bbfa00b74f40b4ce5db2e49b7e7,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

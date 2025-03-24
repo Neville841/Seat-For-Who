@@ -2,21 +2,31 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DragRagdoll : MonoBehaviour
 {
+    //Gizmos
+    Vector3 lastHitPoint;
+    bool seatFound = false;
+
     [SerializeField] Rigidbody selectedRb;
-    [SerializeField] float followSpeed = 10f;
     [SerializeField] LineRenderer lineRenderer;
+    [SerializeField] Seat selectedSeat;
     [SerializeField] internal CharacterBehaviour character;
+
     [SerializeField] LayerMask groundMask;
     [SerializeField] Vector3 offset;
-    [SerializeField] GameObject selectedSeat;
-    private bool isDragging = false;
 
-    public void SetCharacter(CharacterBehaviour characterBehaviour)
+    private bool isDragging = false;
+    [SerializeField] float followSpeed = 10f;
+    [SerializeField] float sphereRadius = .2f;
+
+    public void SetCharacter(CharacterBehaviour characterBehaviour, CharacterSO characterSO, UnityAction completeEvent)
     {
         character = characterBehaviour;
+        character.characterSO = characterSO;
+        character.completeEvent = completeEvent;
         selectedRb = character.head;
         character.OpenRagdoll();
         lineRenderer.positionCount = 2;
@@ -26,8 +36,9 @@ public class DragRagdoll : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) && character)
         {
+            character.ghostCloth.SetActive(false);
             StartCoroutine(AnimatorActivate());
             lineRenderer.positionCount = 0;
             isDragging = false;
@@ -42,10 +53,11 @@ public class DragRagdoll : MonoBehaviour
         else
             StartCoroutine(character.BlendToAnimation(selectedSeat));
         selectedSeat = null;
+        character = null;
     }
     void FixedUpdate()
     {
-        if (isDragging)
+        if (isDragging && character)
         {
             Vector3 targetPosition = GetMouseWorldPosition();
             // Hips'i hareket ettir
@@ -57,6 +69,7 @@ public class DragRagdoll : MonoBehaviour
         }
     }
 
+
     Vector3 GetMouseWorldPosition()
     {
         Vector3 mousePos = Input.mousePosition;
@@ -67,17 +80,42 @@ public class DragRagdoll : MonoBehaviour
         returnedPos.x = returnedPos.x + offset.x;
         return returnedPos;
     }
+
     Vector3 GetMouseRaycastHit()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-
+        selectedSeat = null;
+        character.GhostBody(null);
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundMask))
         {
-            selectedSeat = hit.collider.gameObject;
-            return hit.point; // Çarptýðý noktanýn dünya pozisyonu
-        }
+            lastHitPoint = hit.point; // Son hit noktasýný kaydet
+            seatFound = false; // Önce seat bulunmadý olarak ayarla
 
+            // OverlapSphere ile en yakýn Seat'i bul
+            Collider[] hits = Physics.OverlapSphere(hit.point, sphereRadius, groundMask);
+            foreach (var col in hits)
+            {
+                if (col.TryGetComponent<Seat>(out Seat seat))
+                {
+                    character.GhostBody(seat);
+                    selectedSeat = seat;
+                    seatFound = true; // Seat bulundu
+                    return seat.transform.position; // Seat'in pozisyonuna snap
+                }
+            }
+            return hit.point; // Eðer Seat yoksa normal hit noktasýný döndür
+        }
         return Vector3.zero; // Eðer çarpmazsa boþ bir deðer döndür
     }
+
+    void OnDrawGizmos()
+    {
+        if (lastHitPoint != Vector3.zero)
+        {
+            Gizmos.color = seatFound ? Color.green : Color.red; // Eðer seat varsa yeþil, yoksa mavi
+            Gizmos.DrawWireSphere(lastHitPoint, sphereRadius); // OverlapSphere çapýnda küre çiz
+        }
+    }
+
 }
