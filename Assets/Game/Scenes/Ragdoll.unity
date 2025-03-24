@@ -1099,7 +1099,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   offset: {x: 0, y: 5, z: 1}
-  followSpeed: 5
+  followSpeed: 8
   sphereRadius: 0.2
 --- !u!64 &527839671
 MeshCollider:
