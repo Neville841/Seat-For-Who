@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Rider
   m_EditorClassIdentifier: Assembly-CSharp::CharacterSO
   characterName: Ben Fero
-  characterSprite: {fileID: 21300000, guid: 1bb3c583f1f61c545bbd63acd5b03c86, type: 3}
+  characterSprite: {fileID: 21300000, guid: 8831eb8d984c27e4c8756594bf0d453a, type: 3}
   characterPrefab: {fileID: 4501101395648449844, guid: 8e0337af19d8a5446aacda380327bfdc,
     type: 3}
   seatType: 6

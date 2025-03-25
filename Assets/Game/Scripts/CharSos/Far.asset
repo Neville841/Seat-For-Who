@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Far
   m_EditorClassIdentifier: Assembly-CSharp::CharacterSO
   characterName: Ahmet
-  characterSprite: {fileID: 21300000, guid: a14e6e6d2457d504d839504128196d55, type: 3}
+  characterSprite: {fileID: 21300000, guid: ba20ce039a4810d46a9278c7f4f16181, type: 3}
   characterPrefab: {fileID: 4501101395648449844, guid: 3c2d0a8ddc1d0334fb3d4c7f48ce65aa,
     type: 3}
   seatType: 3
   infos:
   - Ahmet anksiyetelidir
+  - <link=ahmet><color=blue>Ahmet</color></link>, <link=mehmet><color=blue>Mehmet</color></link>
+    ile oturmak istiyor.

@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -16,7 +17,7 @@ public class DragRagdoll : MonoBehaviour
     [SerializeField] internal CharacterBehaviour character;
 
     [SerializeField] LayerMask groundMask;
-    [SerializeField] Vector3 offset;
+    [SerializeField] internal Vector3 offset;
 
     private bool isDragging = false;
     [SerializeField] float followSpeed = 10f;
@@ -28,6 +29,7 @@ public class DragRagdoll : MonoBehaviour
         character.characterSO = characterSO;
         character.completeEvent = completeEvent;
         selectedRb = character.head;
+
         character.OpenRagdoll();
         lineRenderer.positionCount = 2;
         isDragging = true;
@@ -57,16 +59,16 @@ public class DragRagdoll : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (isDragging && character)
-        {
-            Vector3 targetPosition = GetMouseWorldPosition();
-            // Hips'i hareket ettir
-            selectedRb.MovePosition(Vector3.Lerp(selectedRb.position, targetPosition, Time.fixedDeltaTime * followSpeed));
+         if (isDragging && character)
+         {
+             Vector3 targetPosition = GetMouseWorldPosition();
+             // Hips'i hareket ettir
+             selectedRb.MovePosition(Vector3.Lerp(selectedRb.position, targetPosition, Time.fixedDeltaTime * followSpeed));
 
-            // LineRenderer güncelle
-            lineRenderer.SetPosition(0, selectedRb.position); // Çizginin baþlangýcý hips konumu
-            lineRenderer.SetPosition(1, GetMouseRaycastHit()); // Çizginin ucu mouse pozisyonu
-        }
+             // LineRenderer güncelle
+             lineRenderer.SetPosition(0, selectedRb.position); // Çizginin baþlangýcý hips konumu
+             lineRenderer.SetPosition(1, GetMouseRaycastHit()); // Çizginin ucu mouse pozisyonu
+         }
     }
 
 
@@ -83,7 +85,9 @@ public class DragRagdoll : MonoBehaviour
 
     Vector3 GetMouseRaycastHit()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Vector3 mousePos = Input.mousePosition;
+        mousePos.y += offset.z * 150;
+        Ray ray = Camera.main.ScreenPointToRay(mousePos);
         RaycastHit hit;
         selectedSeat = null;
         character.GhostBody(null);

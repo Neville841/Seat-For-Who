@@ -15,7 +15,7 @@ public class CharacterBehaviour : MonoBehaviour
     [SerializeField] internal CharacterSO characterSO;
 
     [SerializeField] List<Transform> ragdollBones;
-    [SerializeField] Transform hips;
+    [SerializeField] internal Transform hips;
 
     [SerializeField] private float blendDuration = 0.5f;
     [ContextMenu("GhostClothSet")]
