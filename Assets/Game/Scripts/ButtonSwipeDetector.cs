@@ -1,21 +1,25 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Zenject;
 
-public class ButtonSwipeDetector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
+public class ButtonSwipeDetector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
+    [Inject] private DiContainer _container;
     public float triggerThreshold = 100f;
     private Vector2 startTouchPos;
-    private bool isPressing = false;
+    [SerializeField] bool isPressing = false;
+    [SerializeField] bool isDragging = false;
     private int originalSiblingIndex;
-    private bool isDragging = false;
 
     [SerializeField] CharacterSO characterSO;
     [SerializeField] GameObject buttonContent;
     HorizontalLayoutGroup layoutGroup;
     ContentSizeFitter sizeFitter;
+    ScrollRect scrollRect;
     DragRagdoll dragRagdoll;
 
     [Header("Info")]
@@ -25,19 +29,19 @@ public class ButtonSwipeDetector : MonoBehaviour, IPointerDownHandler, IPointerU
     [SerializeField] TextMeshProUGUI characterNameText;
     [SerializeField] List<InfoText> InfoTexts;
 
-    public void SetContent(CharacterSO characterSO, HorizontalLayoutGroup horizontalLayoutGroup, ContentSizeFitter contentSizeFitter, Transform infoTextParent, DragRagdoll dragRagdoll)
+    public void SetContent(CharacterSO characterSO, HorizontalLayoutGroup horizontalLayoutGroup, ContentSizeFitter contentSizeFitter, Transform infoTextParent, DragRagdoll dragRagdoll, ScrollRect scrollRect)
     {
         this.characterSO = characterSO;
         layoutGroup = horizontalLayoutGroup;
         sizeFitter = contentSizeFitter;
         this.infoTextParent = infoTextParent;
         this.dragRagdoll = dragRagdoll;
-
+        this.scrollRect = scrollRect;
         characterImage.sprite = characterSO.characterSprite;
         characterNameText.text = characterSO.characterName;
         foreach (string info in characterSO.infos)
         {
-            GameObject infoText = Instantiate(this.infoText, infoTextParent);
+            GameObject infoText = _container.InstantiatePrefab(this.infoText, infoTextParent);
             InfoText infoTextCs = infoText.GetComponent<InfoText>();
             infoTextCs.SetText(info);
             InfoTexts.Add(infoTextCs);
@@ -50,28 +54,55 @@ public class ButtonSwipeDetector : MonoBehaviour, IPointerDownHandler, IPointerU
         isDragging = false;
         startTouchPos = eventData.position; // Parmağın başlangıç noktasını al
         originalSiblingIndex = transform.GetSiblingIndex(); // Sibling indexi kaydet
-        DisableLayout();
+        StartCoroutine(CheckXY());
     }
+    IEnumerator CheckXY()
+    {
+        DisableLayout();
+        yield return new WaitForSeconds(.1f);
+        Vector2 mousePosition2D = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
 
-    public void OnDrag(PointerEventData eventData)
+        Vector2 delta = mousePosition2D - startTouchPos; // Toplam kayma miktarı
+
+        Debug.Log("x: " + Mathf.Abs(delta.x));
+        Debug.Log("y: " + Mathf.Abs(delta.y));
+
+        if (Mathf.Abs(delta.x) > Mathf.Abs(delta.y))
+        {
+            isPressing = false;
+            isDragging = false;
+            EnableLayout();
+            ResetCardPosition();
+            yield break;
+        }
+        else
+        {
+            isDragging = true;
+            DisableLayout();
+        }
+    }
+    void Update()
     {
         if (!isPressing) return;
+        if (!isDragging)
+            return;
 
-        isDragging = true;
-        transform.position = eventData.position; // X ve Y ekseninde parmağı takip et
+        float deltaY = Input.mousePosition.y - startTouchPos.y;
+        if (Mathf.Abs(deltaY) <= 30 && !buttonContent.activeSelf) return;
+        else if (buttonContent.activeSelf) DisableLayout();
 
-        float deltaY = eventData.position.y - startTouchPos.y;
+        transform.position = Input.mousePosition;
+        Debug.Log(deltaY);
         if (deltaY >= triggerThreshold)
         {
             TriggerFunction();
             isPressing = false;
         }
     }
-
     public void OnPointerUp(PointerEventData eventData)
     {
-        if (!isDragging) return;
-
+        if (!isDragging && !isPressing) return;
+        isDragging = false;
         isPressing = false;
         if (buttonContent.activeSelf)
             ResetCardPosition();
@@ -119,11 +150,13 @@ public class ButtonSwipeDetector : MonoBehaviour, IPointerDownHandler, IPointerU
     {
         if (layoutGroup) layoutGroup.enabled = false;
         if (sizeFitter) sizeFitter.enabled = false;
+        if (scrollRect) scrollRect.enabled = false;
     }
 
     private void EnableLayout()
     {
         if (layoutGroup) layoutGroup.enabled = true;
         if (sizeFitter) sizeFitter.enabled = true;
+        if (scrollRect) scrollRect.enabled = true;
     }
 }
