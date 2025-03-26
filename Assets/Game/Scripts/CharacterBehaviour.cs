@@ -44,6 +44,7 @@ public class CharacterBehaviour : MonoBehaviour
         {
             ghostCloth.SetActive(true);
             animatedChar.transform.position = seat.characterPos.position;
+            animatedChar.transform.forward = seat.characterPos.forward;
         }
         else
         {
@@ -81,6 +82,7 @@ public class CharacterBehaviour : MonoBehaviour
         blending = true;
         transform.DOMove(seat.characterPos.position, 1f).OnComplete(() =>
         {
+            ragdollChar.transform.forward = animatedChar.transform.forward;
             blending = false;
             ragdollChar.enabled = true;
             ragdollChar.Play("Sit");

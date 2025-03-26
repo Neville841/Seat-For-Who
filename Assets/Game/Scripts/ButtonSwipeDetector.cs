@@ -50,6 +50,8 @@ public class ButtonSwipeDetector : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        if (!layoutGroup.enabled) return;
+
         isPressing = true;
         isDragging = false;
         startTouchPos = eventData.position; // Parmağın başlangıç noktasını al
@@ -161,18 +163,16 @@ public class ButtonSwipeDetector : MonoBehaviour, IPointerDownHandler
     }
     public void ScrollToTarget()
     {
-        // 1. Scroll'un içindeki nesnenin yerini hesapla
-        float contentWidth = transform.parent.GetComponent<RectTransform>().rect.width; // İçeriğin toplam genişliği
-        float viewportWidth = scrollRect.viewport.rect.width; // Ekranda görünen alan genişliği
+        float contentWidth = transform.parent.GetComponent<RectTransform>().rect.width;
+        float viewportWidth = scrollRect.viewport.rect.width;
 
-        // Hedef objenin content içindeki pozisyonunu al
         float targetX = Mathf.Abs(GetComponent<RectTransform>().anchoredPosition.x);
 
-        // 2. Normalized Position Hesapla (0 -> en sol, 1 -> en sağ)
         float newNormalizedPos = targetX / (contentWidth - viewportWidth);
 
-        // 3. Scroll Position'ı Güncelle
-        scrollRect.horizontalNormalizedPosition = Mathf.Clamp01(newNormalizedPos);
-    }
+        if (transform.GetSiblingIndex() == 0)
+            scrollRect.horizontalNormalizedPosition = Mathf.Clamp01(0);
+        else scrollRect.horizontalNormalizedPosition = Mathf.Clamp01(newNormalizedPos);
 
+    }
 }

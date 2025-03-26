@@ -21,6 +21,8 @@ public class CharactersController : MonoBehaviour
     [SerializeField] internal List<GameCharacters> gameCharacters;
     [SerializeField] internal List<GameCharacters> completedCharacters;
 
+
+    int completedCount;
     void Start()
     {
         for (int i = 0; i < characterSos.Length; i++)
@@ -40,7 +42,11 @@ public class CharactersController : MonoBehaviour
             character = seat.character,
             seats = new List<Seat> { seat }
         });
-
+        completedCount++;
+        if (completedCount >= characterSos.Length)
+        {
+            EventManager.OnLevelWin();
+        }
     }
 }
 [Serializable]
