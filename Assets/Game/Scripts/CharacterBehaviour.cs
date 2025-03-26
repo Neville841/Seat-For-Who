@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.TextCore.Text;
+using Zenject;
 
 public class CharacterBehaviour : MonoBehaviour
 {
+    [Inject] PoolingSystem poolingSystem;
     internal UnityAction completeEvent;
     [SerializeField] internal GameObject ghostCloth, realCloth;
 
@@ -48,55 +50,98 @@ public class CharacterBehaviour : MonoBehaviour
             ghostCloth.SetActive(false);
         }
     }
-    public IEnumerator BlendToAnimation(Seat seat)
+    bool blending;
+    float elapsedTime = 0f;
+    private void FixedUpdate()
     {
-        if (seat.seatType != characterSO.SeatType)
+        if (blending)
         {
-            Destroy(gameObject);
-            yield break;
-        }
-        animatedChar.transform.localPosition = Vector3.zero;
-        float elapsedTime = 0f;
-        transform.position = hips.transform.position;
-        hips.localPosition = Vector3.zero;
-        transform.DOMove(seat.characterPos.position, .5f);
-        while (elapsedTime < .75f)
-        {
-            elapsedTime += Time.deltaTime;
-            float t = elapsedTime / blendDuration / 10;
+            elapsedTime += Time.fixedDeltaTime;
+            float t = Mathf.Clamp01(elapsedTime / (blendDuration * 7f));
             foreach (var bone in ragdollBones)
             {
                 Transform animBone = GetMatchingAnimatedBone(bone);
                 if (animBone == null) continue;
                 bone.position = Vector3.Lerp(bone.position, animBone.position, t);
                 bone.rotation = Quaternion.Slerp(bone.rotation, animBone.rotation, t);
-                if (Vector3.Distance(bone.position, animBone.position) <= 0.2f)
+                if (Vector3.Distance(bone.position, animBone.position) <= 0.02f)
                 {
                     bone.GetComponent<Rigidbody>().useGravity = false;
                     bone.GetComponent<Rigidbody>().isKinematic = true;
                 }
             }
+        }
+    }
+    public IEnumerator BlendToAnimation(Seat seat)
+    {
+        animatedChar.transform.localPosition = Vector3.zero;
+        transform.position = hips.transform.position;
+        hips.localPosition = Vector3.zero;
+        elapsedTime = 0f;
+        blending = true;
+        transform.DOMove(seat.characterPos.position, 1f).OnComplete(() =>
+        {
+            blending = false;
+            ragdollChar.enabled = true;
+            ragdollChar.Play("Sit");
+            if (seat.seatType != characterSO.SeatType)
+            {
+                VfxSpawn("Angry");
+                StartCoroutine(DestroyDelay());
+            }
+            else if (characterSO.SeatType != SeatType.None)
+            {
+                VfxSpawn("Happy");
+                seat.SetCharacter(this);
+                completeEvent.Invoke();
+            }
+            else if (seat.CheckSeats(this))
+            {
+                VfxSpawn("Happy");
+                seat.SetCharacter(this);
+                completeEvent.Invoke();
+            }
+            else
+            {
+                Debug.Log("sandalye yok");
+                VfxSpawn("Angry");
+                StartCoroutine(DestroyDelay());
+            }
+        });
+        while (elapsedTime < 5f)
+        {
+
             yield return null;
         }
-        seat.SetCharacter(this);
-        ragdollChar.enabled = true;
-        ragdollChar.Play("Sit");
-        completeEvent.Invoke();
-    }
 
+    }
+    IEnumerator DestroyDelay()
+    {
+        EventManager.OnWrongSeat();
+        yield return new WaitForSeconds(1f);
+        VfxSpawn("Poof");
+        yield return new WaitForSeconds(.2f);
+        Destroy(gameObject);
+    }
+    void VfxSpawn(string name)
+    {
+        Vector3 pos = transform.position;
+        pos.y += 2f;
+        poolingSystem.InstantiateAPS(name, pos);
+    }
     private Transform GetMatchingAnimatedBone(Transform ragdollBone)
     {
         Transform animatedBone = FindChildRecursive(animatedChar.transform, ragdollBone.name);
 
-        if (animatedBone == null)
-        {
-            Debug.LogWarning($"Kemik eþleþmedi: {ragdollBone.name}");
-        }
-        else
-        {
-            Debug.Log($"Eþleþen Kemik: {ragdollBone.name} -> {animatedBone.name}");
-        }
-
+        /* if (animatedBone == null)
+         {
+             Debug.LogWarning($"Kemik eþleþmedi: {ragdollBone.name}");
+         }
+         else
+         {
+             Debug.Log($"Eþleþen Kemik: {ragdollBone.name} -> {animatedBone.name}");
+         }
+        */
         return animatedBone;
     }
 

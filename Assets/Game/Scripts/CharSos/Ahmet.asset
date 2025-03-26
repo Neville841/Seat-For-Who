@@ -18,6 +18,4 @@ MonoBehaviour:
     type: 3}
   seatType: 3
   infos:
-  - Ahmet anksiyetelidir
-  - <link=Mursel><color=blue>Mursel</color></link>, <link=Mehmet><color=blue>Mehmet</color></link>
-    ile oturmak istiyor.
+  - <link=Ahmet><color=blue>Ahmet</color></link> anksiyetelidir

@@ -14,6 +14,29 @@ public class Seat : MonoBehaviour
     {
         if (character) gameObject.layer = 0;
     }
+    public bool CheckSeats(CharacterBehaviour characterBehaviour)
+    {
+        var gameCharacter = characterController.gameCharacters.Find(c => c.name == characterBehaviour.characterSO.characterName);
+        if (gameCharacter != null)
+        {
+            if (gameCharacter.seats.Contains(this))
+            {
+                Debug.Log("gameCharacter Contains");
+                return true;
+            }
+            else
+            {
+                Debug.Log("Sandalye yok");
+                return false;
+            }
+
+        }
+        else
+        {
+            Debug.Log("gameCharacter null");
+            return false;
+        }
+    }
     public void SetCharacter(CharacterBehaviour characterBehaviour)
     {
         character = characterBehaviour;

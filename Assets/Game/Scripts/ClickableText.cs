@@ -25,6 +25,7 @@ public class ClickableText : MonoBehaviour, IPointerClickHandler
             if (gameCharacter != null)
             {
                 gameCharacter.content.DOKill();
+                gameCharacter.content.GetComponent<ButtonSwipeDetector>().ScrollToTarget();
                 gameCharacter.content.DOScale(Vector3.one * 1.2f, .2f)
                     .SetLoops(6, LoopType.Yoyo)
                     .OnComplete(() => gameCharacter.content.DOScale(Vector3.one, .2f));

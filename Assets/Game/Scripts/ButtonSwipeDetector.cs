@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Zenject;
 
-public class ButtonSwipeDetector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class ButtonSwipeDetector : MonoBehaviour, IPointerDownHandler
 {
     [Inject] private DiContainer _container;
     public float triggerThreshold = 100f;
@@ -58,14 +58,10 @@ public class ButtonSwipeDetector : MonoBehaviour, IPointerDownHandler, IPointerU
     }
     IEnumerator CheckXY()
     {
-        DisableLayout();
         yield return new WaitForSeconds(.1f);
         Vector2 mousePosition2D = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
 
         Vector2 delta = mousePosition2D - startTouchPos; // Toplam kayma miktarı
-
-        Debug.Log("x: " + Mathf.Abs(delta.x));
-        Debug.Log("y: " + Mathf.Abs(delta.y));
 
         if (Mathf.Abs(delta.x) > Mathf.Abs(delta.y))
         {
@@ -73,6 +69,7 @@ public class ButtonSwipeDetector : MonoBehaviour, IPointerDownHandler, IPointerU
             isDragging = false;
             EnableLayout();
             ResetCardPosition();
+
             yield break;
         }
         else
@@ -83,6 +80,20 @@ public class ButtonSwipeDetector : MonoBehaviour, IPointerDownHandler, IPointerU
     }
     void Update()
     {
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (!isDragging && !isPressing) return;
+            isDragging = false;
+            isPressing = false;
+            if (buttonContent.activeSelf)
+                ResetCardPosition();
+            else
+            {
+                if (dragRagdoll.selectedSeat) Invoke("ResetCardPosition", 2f);
+                else ResetCardPosition();
+            }
+        }
+
         if (!isPressing) return;
         if (!isDragging)
             return;
@@ -92,28 +103,17 @@ public class ButtonSwipeDetector : MonoBehaviour, IPointerDownHandler, IPointerU
         else if (buttonContent.activeSelf) DisableLayout();
 
         transform.position = Input.mousePosition;
-        Debug.Log(deltaY);
         if (deltaY >= triggerThreshold)
         {
             TriggerFunction();
             isPressing = false;
         }
-    }
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        if (!isDragging && !isPressing) return;
-        isDragging = false;
-        isPressing = false;
-        if (buttonContent.activeSelf)
-            ResetCardPosition();
-        else
-            Invoke("ResetCardPosition", 1f);
-    }
 
+    }
     private void TriggerFunction()
     {
         buttonContent.SetActive(false);
-        GameObject character = Instantiate(characterSO.characterPrefab);
+        GameObject character = _container.InstantiatePrefab(characterSO.characterPrefab);
         CharacterBehaviour characterBehaviour = character.GetComponent<CharacterBehaviour>();
 
         character.transform.position = GetMouseWorldPosition(characterBehaviour);
@@ -159,4 +159,20 @@ public class ButtonSwipeDetector : MonoBehaviour, IPointerDownHandler, IPointerU
         if (sizeFitter) sizeFitter.enabled = true;
         if (scrollRect) scrollRect.enabled = true;
     }
+    public void ScrollToTarget()
+    {
+        // 1. Scroll'un içindeki nesnenin yerini hesapla
+        float contentWidth = transform.parent.GetComponent<RectTransform>().rect.width; // İçeriğin toplam genişliği
+        float viewportWidth = scrollRect.viewport.rect.width; // Ekranda görünen alan genişliği
+
+        // Hedef objenin content içindeki pozisyonunu al
+        float targetX = Mathf.Abs(GetComponent<RectTransform>().anchoredPosition.x);
+
+        // 2. Normalized Position Hesapla (0 -> en sol, 1 -> en sağ)
+        float newNormalizedPos = targetX / (contentWidth - viewportWidth);
+
+        // 3. Scroll Position'ı Güncelle
+        scrollRect.horizontalNormalizedPosition = Mathf.Clamp01(newNormalizedPos);
+    }
+
 }

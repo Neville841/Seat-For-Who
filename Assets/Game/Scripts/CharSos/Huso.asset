@@ -18,4 +18,6 @@ MonoBehaviour:
     type: 3}
   seatType: 0
   infos:
-  - Huso uygun zamanda sofore suikast yapicak
+  - <link=Huso><color=blue>Huso</color></link> uygun zamanda sofore suikast yapicak
+  - <link=Mursel><color=blue>Mursel</color></link>, <link=Huso><color=blue>Huso</color></link>
+    ile oturmak istiyor.

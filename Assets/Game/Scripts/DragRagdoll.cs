@@ -13,7 +13,7 @@ public class DragRagdoll : MonoBehaviour
 
     [SerializeField] Rigidbody selectedRb;
     [SerializeField] LineRenderer lineRenderer;
-    [SerializeField] Seat selectedSeat;
+    [SerializeField] internal Seat selectedSeat;
     [SerializeField] internal CharacterBehaviour character;
 
     [SerializeField] LayerMask groundMask;
