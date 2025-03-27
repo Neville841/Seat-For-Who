@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 728337fd51b1450468f7d880a48205e5, type: 3}
+  m_Name: BlackViking
+  m_EditorClassIdentifier: 
+  characterName: Khalid
+  characterSprite: {fileID: 21300000, guid: b44430981c2f5a141961ed547af9fd4f, type: 3}
+  characterPrefab: {fileID: 2860483544784954562, guid: 2245dc9bd98510f43bf99125cf9fa9b9,
+    type: 3}
+  seatType: 0
+  infos:
+  - <link=Khalid><u>Khalid</u></link><color=#092C50> must protect <link=Ambassador><u><color=#379FFB>Ambassador</color></u></link></color>
+  - <link=Mehmet><u><color=#379FFB>Mehmet</color></u></link> <color=#379FFB>eve gidecek.</color>

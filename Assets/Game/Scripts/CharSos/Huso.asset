@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CharacterSO
   characterName: Huso
   characterSprite: {fileID: 21300000, guid: 557724b4851f8dc439f31fa76c0820a0, type: 3}
-  characterPrefab: {fileID: 4501101395648449844, guid: 1c2d70af66e8e9544817172667d8d377,
+  characterPrefab: {fileID: 4501101395648449844, guid: 334a31c9edf4ab044a8c68f9ee00e717,
     type: 3}
   seatType: 0
   infos:

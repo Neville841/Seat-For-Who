@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4708581700648208012}
   - component: {fileID: 655869365301865801}
   - component: {fileID: 8739398591185765364}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pCylinder67
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 4303362239724966606}
   - component: {fileID: 8505838105079384566}
   - component: {fileID: 3284143668186254490}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: polySurface11 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 2398380745330643259}
   - component: {fileID: 3190877206376181888}
   - component: {fileID: 2362796098905789347}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: plate (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 3378479333561346667}
   - component: {fileID: 8127045407015863640}
   - component: {fileID: 2762080052899686655}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: polySurface2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -343,7 +343,7 @@ GameObject:
   - component: {fileID: 5334796261694260386}
   - component: {fileID: 629286281747742398}
   - component: {fileID: 546563496402479006}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pCube78
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -426,7 +426,7 @@ GameObject:
   - component: {fileID: 2317266658556601712}
   - component: {fileID: 6005249663625933512}
   - component: {fileID: 2275678340523890435}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pSphere22 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -509,7 +509,7 @@ GameObject:
   - component: {fileID: 6739430727231077024}
   - component: {fileID: 639701033268245931}
   - component: {fileID: 3829124530458592391}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pCube89
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -592,7 +592,7 @@ GameObject:
   - component: {fileID: 5445989962410226237}
   - component: {fileID: 1451441216575412384}
   - component: {fileID: 5039926306574513372}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: plate (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -673,7 +673,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3357024875090072503}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: kingTable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -739,7 +739,7 @@ GameObject:
   - component: {fileID: 1822160244931448336}
   - component: {fileID: 326540250547097730}
   - component: {fileID: 7155809065602175705}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tableLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -822,7 +822,7 @@ GameObject:
   - component: {fileID: 6786153563908920852}
   - component: {fileID: 7191959346730752096}
   - component: {fileID: 6945404641244334295}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: polySurface11 (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -905,7 +905,7 @@ GameObject:
   - component: {fileID: 3915919643420532134}
   - component: {fileID: 8019978135743054244}
   - component: {fileID: 1752825049482757273}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: polySurface11 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -988,7 +988,7 @@ GameObject:
   - component: {fileID: 2880504149220562573}
   - component: {fileID: 7270482249950716932}
   - component: {fileID: 383044593438480350}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: plate (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1071,7 +1071,7 @@ GameObject:
   - component: {fileID: 650165778991164540}
   - component: {fileID: 1823445586712267741}
   - component: {fileID: 4093126735540842429}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: plate (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1154,7 +1154,7 @@ GameObject:
   - component: {fileID: 5682424989625393028}
   - component: {fileID: 2969111655800111463}
   - component: {fileID: 5240401737123402673}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: polySurface11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1237,7 +1237,7 @@ GameObject:
   - component: {fileID: 3384265771296257748}
   - component: {fileID: 2361680137234452187}
   - component: {fileID: 6956357832762408580}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tableTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1320,7 +1320,7 @@ GameObject:
   - component: {fileID: 4188361027732244913}
   - component: {fileID: 4920165975981892785}
   - component: {fileID: 2929067742480361651}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: bigPlate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1403,7 +1403,7 @@ GameObject:
   - component: {fileID: 6325672161814803521}
   - component: {fileID: 8229689814123276921}
   - component: {fileID: 7154402497623147902}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: plate (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1487,7 +1487,7 @@ GameObject:
   - component: {fileID: 4848236332583339865}
   - component: {fileID: 5810925850023057780}
   - component: {fileID: 7070732781685814802}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plane (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1592,7 +1592,7 @@ GameObject:
   - component: {fileID: 811318156618155695}
   - component: {fileID: 3915788075480041632}
   - component: {fileID: 2226017399434830794}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: polySurface11 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1675,7 +1675,7 @@ GameObject:
   - component: {fileID: 3296478265368780735}
   - component: {fileID: 6766798883733145455}
   - component: {fileID: 5010808566520479550}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: plate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1758,7 +1758,7 @@ GameObject:
   - component: {fileID: 8549344769790569156}
   - component: {fileID: 3387767320325863445}
   - component: {fileID: 7040255492784469545}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: polySurface11 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1841,7 +1841,7 @@ GameObject:
   - component: {fileID: 5939284993241217187}
   - component: {fileID: 6489990305355913026}
   - component: {fileID: 3210034622904665641}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pCylinder67 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1924,7 +1924,7 @@ GameObject:
   - component: {fileID: 6386355197080075994}
   - component: {fileID: 2477835183515673892}
   - component: {fileID: 8841811689346647744}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: plate (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2007,7 +2007,7 @@ GameObject:
   - component: {fileID: 4082508678943287808}
   - component: {fileID: 1427649863741478461}
   - component: {fileID: 2932582384683848216}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pSphere22
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2090,7 +2090,7 @@ GameObject:
   - component: {fileID: 2062062522215033801}
   - component: {fileID: 3588387351610108249}
   - component: {fileID: 3638928173371604958}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: polySurface11 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2173,7 +2173,7 @@ GameObject:
   - component: {fileID: 2203706928853371037}
   - component: {fileID: 1921427936800040799}
   - component: {fileID: 8450714179040203344}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pCylinder53
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2258,6 +2258,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: chair (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5131460659593311158, guid: 405d63bebf93d844e809497634ac0f30,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5473142822213652776, guid: 405d63bebf93d844e809497634ac0f30,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2307,6 +2312,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189961175714177205, guid: 405d63bebf93d844e809497634ac0f30,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2406,6 +2416,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: chair (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5131460659593311158, guid: 405d63bebf93d844e809497634ac0f30,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5473142822213652776, guid: 405d63bebf93d844e809497634ac0f30,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2456,6 +2471,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7189961175714177205, guid: 405d63bebf93d844e809497634ac0f30,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2479,6 +2499,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: chair (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5131460659593311158, guid: 405d63bebf93d844e809497634ac0f30,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5473142822213652776, guid: 405d63bebf93d844e809497634ac0f30,
         type: 3}
@@ -2530,6 +2555,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7189961175714177205, guid: 405d63bebf93d844e809497634ac0f30,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2553,6 +2583,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: chair (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5131460659593311158, guid: 405d63bebf93d844e809497634ac0f30,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5473142822213652776, guid: 405d63bebf93d844e809497634ac0f30,
         type: 3}
@@ -2604,6 +2639,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7189961175714177205, guid: 405d63bebf93d844e809497634ac0f30,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2627,6 +2667,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: chair (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5131460659593311158, guid: 405d63bebf93d844e809497634ac0f30,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5473142822213652776, guid: 405d63bebf93d844e809497634ac0f30,
         type: 3}
@@ -2678,6 +2723,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7189961175714177205, guid: 405d63bebf93d844e809497634ac0f30,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2701,6 +2751,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: chair
+      objectReference: {fileID: 0}
+    - target: {fileID: 5131460659593311158, guid: 405d63bebf93d844e809497634ac0f30,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5473142822213652776, guid: 405d63bebf93d844e809497634ac0f30,
         type: 3}
@@ -2751,6 +2806,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189961175714177205, guid: 405d63bebf93d844e809497634ac0f30,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

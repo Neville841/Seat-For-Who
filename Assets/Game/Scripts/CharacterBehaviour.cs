@@ -1,6 +1,8 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.TextCore.Text;
@@ -15,18 +17,27 @@ public class CharacterBehaviour : MonoBehaviour
     [SerializeField] internal Animator animatedChar, ragdollChar;
     [SerializeField] internal Rigidbody head;
     [SerializeField] internal CharacterSO characterSO;
+    [SerializeField] string readyCharacterName;
 
     [SerializeField] List<Transform> ragdollBones;
     [SerializeField] internal Transform hips;
 
     [SerializeField] private float blendDuration = 0.5f;
+    [SerializeField] Canvas canvas;
+    [SerializeField] TextMeshProUGUI nameText;
+    [SerializeField] HitEffect hitEffect;
     [ContextMenu("GhostClothSet")]
     public void GhostClothSet()
     {
         GhostClothingSync ghostCloth = new GhostClothingSync(realCloth, this.ghostCloth);
     }
+    private void OnEnable()
+    {
+        nameText.text = characterSO ? characterSO.characterName : readyCharacterName;
+    }
     public void OpenRagdoll()
-    { // Karakterin tüm kemiklerini al ve listeye ekle
+    {
+        nameText.text = characterSO ? characterSO.characterName : readyCharacterName;
         foreach (Rigidbody rb in GetComponentsInChildren<Rigidbody>())
         {
             ragdollBones.Add(rb.transform);
@@ -53,6 +64,12 @@ public class CharacterBehaviour : MonoBehaviour
     }
     bool blending;
     float elapsedTime = 0f;
+    private void LateUpdate()
+    {
+        Vector3 canvasPos = head.transform.position;
+        canvasPos.y += 1f;
+        canvas.transform.position = canvasPos;
+    }
     private void FixedUpdate()
     {
         if (blending)
@@ -119,6 +136,7 @@ public class CharacterBehaviour : MonoBehaviour
     }
     IEnumerator DestroyDelay()
     {
+        hitEffect.PlayHitEffect();
         EventManager.OnWrongSeat();
         yield return new WaitForSeconds(1f);
         VfxSpawn("Poof");
@@ -128,7 +146,8 @@ public class CharacterBehaviour : MonoBehaviour
     void VfxSpawn(string name)
     {
         Vector3 pos = transform.position;
-        pos.y += 2f;
+        pos.y += 1.2f;
+        pos.z -= .6f;
         poolingSystem.InstantiateAPS(name, pos);
     }
     private Transform GetMatchingAnimatedBone(Transform ragdollBone)

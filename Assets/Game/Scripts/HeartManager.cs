@@ -5,7 +5,7 @@ using UnityEngine;
 public class HeartManager : MonoBehaviour
 {
     [SerializeField] Heart[] hearts;
-    internal int heartIndex;
+    [SerializeField] internal int heartIndex;
     private void Start()
     {
         heartIndex = hearts.Length - 1;
@@ -22,7 +22,9 @@ public class HeartManager : MonoBehaviour
     void WrongSeat()
     {
         if (hearts.Length < 0) return;
-        hearts[heartIndex].Broke();
+        if (hearts[heartIndex] != null)
+            hearts[heartIndex].Broke();
+        else Debug.Log(hearts[heartIndex] + "null");
         heartIndex--;
         if (heartIndex < 0)
             EventManager.OnLevelLose();

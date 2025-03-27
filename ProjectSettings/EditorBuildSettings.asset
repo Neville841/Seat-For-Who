@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Game/Scenes/Ragdoll.unity
-    guid: b79172d63e1615f47ae57697ae3b1464
+    path: Assets/Game/Scenes/Menu.unity
+    guid: f01391758c50d9342b2d33628666631b
+  - enabled: 1
+    path: Assets/Game/Scenes/KingTable.unity
+    guid: caefb66c248b55544b0b953082c6b921
+  - enabled: 1
+    path: Assets/Game/Scenes/Bus.unity
+    guid: 8899ef59324ce214b97036480fa4a59d
   m_configObjects: {}

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CharacterSO
   characterName: Ahmet
   characterSprite: {fileID: 21300000, guid: ba20ce039a4810d46a9278c7f4f16181, type: 3}
-  characterPrefab: {fileID: 4501101395648449844, guid: 3c2d0a8ddc1d0334fb3d4c7f48ce65aa,
+  characterPrefab: {fileID: 4501101395648449844, guid: 334a31c9edf4ab044a8c68f9ee00e717,
     type: 3}
   seatType: 3
   infos:
