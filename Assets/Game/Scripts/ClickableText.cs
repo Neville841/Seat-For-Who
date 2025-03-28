@@ -18,6 +18,7 @@ public class ClickableText : MonoBehaviour, IPointerClickHandler
 
         if (linkIndex != -1)
         {
+            Taptic.Medium();
             TMP_LinkInfo linkInfo = textComponent.textInfo.linkInfo[linkIndex];
             string linkId = linkInfo.GetLinkID();
             Debug.Log(linkId);

@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1207823052774848848
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7499284667481893602}
+  - component: {fileID: 1937764231276338936}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7499284667481893602
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1207823052774848848}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.491029, y: -15.651219, z: 34.936615}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1937764231276338936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1207823052774848848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be99c67e8ee62f94ea7b2ff5088c852e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Fail
+    clip: {fileID: 8300000, guid: 0420614c514897947ac32eee72cee16f, type: 3}
+    mixerGroup: {fileID: 6590316593425708891, guid: aa4ec6a042a0b28409c5d8edb6029c83,
+      type: 2}
+    loop: 0
+    volume: 1
+    pitch: 1.5
+  - name: CartToSpawn
+    clip: {fileID: 8300000, guid: 82d8be058a7e18346a4e5dd184e8c1c6, type: 3}
+    mixerGroup: {fileID: 6590316593425708891, guid: aa4ec6a042a0b28409c5d8edb6029c83,
+      type: 2}
+    loop: 0
+    volume: 1
+    pitch: 1.5
+  - name: Music
+    clip: {fileID: 8300000, guid: 1d797b61b5d9a5a41ba2c1e9c775e000, type: 3}
+    mixerGroup: {fileID: 1143630238379237794, guid: aa4ec6a042a0b28409c5d8edb6029c83,
+      type: 2}
+    loop: 1
+    volume: 1
+    pitch: 1.5
+  - name: Sit
+    clip: {fileID: 8300000, guid: 562874c1149bcc54fbece644b47b9e6b, type: 3}
+    mixerGroup: {fileID: 6590316593425708891, guid: aa4ec6a042a0b28409c5d8edb6029c83,
+      type: 2}
+    loop: 0
+    volume: 1
+    pitch: 1.5
+  - name: TrueSeat
+    clip: {fileID: 8300000, guid: 8abee602a03a4b341a7f6d4465af6f7f, type: 3}
+    mixerGroup: {fileID: 6590316593425708891, guid: aa4ec6a042a0b28409c5d8edb6029c83,
+      type: 2}
+    loop: 0
+    volume: 1
+    pitch: 1.5
+  - name: Win
+    clip: {fileID: 8300000, guid: 635e075e0d3b2d745b03364fce7b2332, type: 3}
+    mixerGroup: {fileID: 6590316593425708891, guid: aa4ec6a042a0b28409c5d8edb6029c83,
+      type: 2}
+    loop: 0
+    volume: 1
+    pitch: 1.5
+  - name: Confetti
+    clip: {fileID: 8300000, guid: 067d154d133fa8c4b83f19571aee7423, type: 3}
+    mixerGroup: {fileID: 6590316593425708891, guid: aa4ec6a042a0b28409c5d8edb6029c83,
+      type: 2}
+    loop: 0
+    volume: 1
+    pitch: 1.5
+  - name: FalseSeat
+    clip: {fileID: 8300000, guid: fe53f6037eecb4145bf8726c836d8e12, type: 3}
+    mixerGroup: {fileID: 6590316593425708891, guid: aa4ec6a042a0b28409c5d8edb6029c83,
+      type: 2}
+    loop: 0
+    volume: 1
+    pitch: 1.5

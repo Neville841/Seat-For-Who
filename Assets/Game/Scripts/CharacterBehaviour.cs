@@ -12,6 +12,7 @@ using Zenject;
 public class CharacterBehaviour : MonoBehaviour
 {
     [Inject] PoolingSystem poolingSystem;
+    [Inject] AudioManager audioManager;
     internal UnityAction completeEvent;
     [SerializeField] internal GameObject ghostCloth, realCloth;
 
@@ -98,6 +99,7 @@ public class CharacterBehaviour : MonoBehaviour
                         ragdollChar.transform.forward = animatedChar.transform.forward;
                         ragdollChar.enabled = true;
                         ragdollChar.Play("Sit");
+                        audioManager.Play("Sit");
                         sit = true;
                     }
                 }
@@ -107,6 +109,7 @@ public class CharacterBehaviour : MonoBehaviour
     public IEnumerator BlendToAnimation(Seat seat)
     {
         animatedChar.Play("Fall");
+        animatedChar.transform.position = new Vector3(0, 100, 0);
         animatedChar.transform.localPosition = Vector3.zero;
         transform.position = hips.transform.position;
         hips.localPosition = Vector3.zero;
@@ -124,12 +127,14 @@ public class CharacterBehaviour : MonoBehaviour
             else if (characterSO.SeatType != SeatType.None)
             {
                 VfxSpawn("Happy");
+                audioManager.Play("TrueSeat");
                 seat.SetCharacter(this);
                 completeEvent.Invoke();
             }
             else if (seat.CheckSeats(this))
             {
                 VfxSpawn("Happy");
+                audioManager.Play("TrueSeat");
                 seat.SetCharacter(this);
                 completeEvent.Invoke();
             }
@@ -148,7 +153,9 @@ public class CharacterBehaviour : MonoBehaviour
     }
     IEnumerator DestroyDelay()
     {
+        Taptic.Failure();
         hitEffect.PlayHitEffect();
+        audioManager.Play("FalseSeat");
         EventManager.OnWrongSeat();
         yield return new WaitForSeconds(1f);
         VfxSpawn("Poof");

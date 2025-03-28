@@ -3,13 +3,16 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Zenject;
 
 public class LoadingScene : MonoBehaviour
 {
+    [Inject] AudioManager audioManager;
     [SerializeField] Slider slider;
     [SerializeField] TextMeshProUGUI text;
     private void Awake()
     {
+        audioManager.Play("Music");
         DOTween.To(() => slider.value, x => slider.value = x, 100, 2).OnUpdate(() =>
         {
             int roundedValue = Mathf.RoundToInt(slider.value);

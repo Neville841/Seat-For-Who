@@ -39,6 +39,7 @@ public class Seat : MonoBehaviour
     }
     public void SetCharacter(CharacterBehaviour characterBehaviour)
     {
+        Taptic.Success();
         character = characterBehaviour;
         gameObject.layer = 0;
         characterController.SetCompletedCharacter(this);

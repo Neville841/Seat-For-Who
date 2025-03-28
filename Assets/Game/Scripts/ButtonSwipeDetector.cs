@@ -9,6 +9,8 @@ using Zenject;
 public class ButtonSwipeDetector : MonoBehaviour, IPointerDownHandler
 {
     [Inject] private DiContainer _container;
+    [Inject] AudioManager audioManager;
+
     public float triggerThreshold = 100f;
     private Vector2 startTouchPos;
     [SerializeField] bool isPressing = false;
@@ -77,6 +79,7 @@ public class ButtonSwipeDetector : MonoBehaviour, IPointerDownHandler
         else
         {
             isDragging = true;
+            Taptic.Medium();
             DisableLayout();
         }
     }
@@ -116,6 +119,7 @@ public class ButtonSwipeDetector : MonoBehaviour, IPointerDownHandler
     {
         buttonContent.SetActive(false);
         GameObject character = _container.InstantiatePrefab(characterSO.characterPrefab);
+        audioManager.Play("CartToSpawn");
         CharacterBehaviour characterBehaviour = character.GetComponent<CharacterBehaviour>();
 
         character.transform.position = GetMouseWorldPosition(characterBehaviour);
