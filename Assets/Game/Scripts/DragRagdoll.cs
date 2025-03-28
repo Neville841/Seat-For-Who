@@ -40,7 +40,8 @@ public class DragRagdoll : MonoBehaviour
     {
         if (Input.GetMouseButtonUp(0) && character)
         {
-            character.ghostCloth.SetActive(false);
+           // character.animatedChar.Play("Fall");
+            //character.ghostCloth.SetActive(false);
             StartCoroutine(AnimatorActivate());
             //lineRenderer.positionCount = 0;
             isDragging = false;
@@ -59,17 +60,17 @@ public class DragRagdoll : MonoBehaviour
     }
     void FixedUpdate()
     {
-         if (isDragging && character)
-         {
-             Vector3 targetPosition = GetMouseWorldPosition();
-             // Hips'i hareket ettir
-             selectedRb.MovePosition(Vector3.Lerp(selectedRb.position, targetPosition, Time.fixedDeltaTime * followSpeed));
+        if (isDragging && character)
+        {
+            Vector3 targetPosition = GetMouseWorldPosition();
+            // Hips'i hareket ettir
+            selectedRb.MovePosition(Vector3.Lerp(selectedRb.position, targetPosition, Time.fixedDeltaTime * followSpeed));
 
-             // LineRenderer güncelle
-             //lineRenderer.SetPosition(0, selectedRb.position); // Çizginin baþlangýcý hips konumu
-             //lineRenderer.SetPosition(1, GetMouseRaycastHit()); // Çizginin ucu mouse pozisyonu
+            // LineRenderer güncelle
+            //lineRenderer.SetPosition(0, selectedRb.position); // Çizginin baþlangýcý hips konumu
+            //lineRenderer.SetPosition(1, GetMouseRaycastHit()); // Çizginin ucu mouse pozisyonu
             GetMouseRaycastHit();
-         }
+        }
     }
 
 

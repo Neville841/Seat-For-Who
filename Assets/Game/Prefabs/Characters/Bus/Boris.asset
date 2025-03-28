@@ -18,5 +18,5 @@ MonoBehaviour:
     type: 3}
   seatType: 0
   infos:
-  - <link=Boris><u>Boris</u></link><color=#092C50> must sit on the double seat, or
-    he will be stuck and sad.</color>
+  - <link=Boris><u>Boris</u></link><color=#092C50> has social anxiety, he should
+    be alone in two seater.</color>

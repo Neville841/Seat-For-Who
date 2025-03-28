@@ -37,7 +37,7 @@ public class HitEffect : MonoBehaviour
                 {
                     block.SetFloat(flashProperty, x);
                     rend.SetPropertyBlock(block);
-                }, 1f, flashDuration));
+                }, .6f, flashDuration));
 
                 seq.Append(DOTween.To(() => block.GetFloat(flashProperty), x =>
                 {

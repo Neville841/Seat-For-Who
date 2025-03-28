@@ -18,4 +18,4 @@ MonoBehaviour:
     type: 3}
   seatType: 0
   infos:
-  - '<link=Speed><u>Speed</u></link><color=#092C50> is drinking a milkshake.</color>  '
+  - '<link=Speed><u>Speed</u></link><color=#092C50> doesn''t want to be drawn.</color>  '

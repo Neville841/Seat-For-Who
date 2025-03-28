@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -34,6 +35,10 @@ public class CharacterBehaviour : MonoBehaviour
     private void OnEnable()
     {
         nameText.text = characterSO ? characterSO.characterName : readyCharacterName;
+        if (readyCharacterName != string.Empty)
+        {
+            ragdollChar.Play("Sit idle");
+        }
     }
     public void OpenRagdoll()
     {
@@ -48,6 +53,7 @@ public class CharacterBehaviour : MonoBehaviour
             bone.GetComponent<Rigidbody>().useGravity = true;
             bone.GetComponent<Rigidbody>().isKinematic = false;
         }
+        GhostClothSet();
     }
     public void GhostBody(Seat seat)
     {
@@ -70,12 +76,13 @@ public class CharacterBehaviour : MonoBehaviour
         canvasPos.y += 1f;
         canvas.transform.position = canvasPos;
     }
+    bool sit;
     private void FixedUpdate()
     {
         if (blending)
         {
             elapsedTime += Time.fixedDeltaTime;
-            float t = Mathf.Clamp01(elapsedTime / (blendDuration * 7f));
+            float t = Mathf.Clamp01(elapsedTime / (blendDuration * 4));
             foreach (var bone in ragdollBones)
             {
                 Transform animBone = GetMatchingAnimatedBone(bone);
@@ -86,12 +93,19 @@ public class CharacterBehaviour : MonoBehaviour
                 {
                     bone.GetComponent<Rigidbody>().useGravity = false;
                     bone.GetComponent<Rigidbody>().isKinematic = true;
+                    if (!sit)
+                    {
+                        ragdollChar.enabled = true;
+                        ragdollChar.Play("Sit");
+                        sit = true;
+                    }
                 }
             }
         }
     }
     public IEnumerator BlendToAnimation(Seat seat)
     {
+        animatedChar.Play("Fall");
         animatedChar.transform.localPosition = Vector3.zero;
         transform.position = hips.transform.position;
         hips.localPosition = Vector3.zero;
@@ -99,10 +113,9 @@ public class CharacterBehaviour : MonoBehaviour
         blending = true;
         transform.DOMove(seat.characterPos.position, 1f).OnComplete(() =>
         {
+            ragdollChar.transform.DOScale(Vector3.one, .2f);
             ragdollChar.transform.forward = animatedChar.transform.forward;
             blending = false;
-            ragdollChar.enabled = true;
-            ragdollChar.Play("Sit");
             if (seat.seatType != characterSO.SeatType)
             {
                 VfxSpawn("Angry");
@@ -127,12 +140,11 @@ public class CharacterBehaviour : MonoBehaviour
                 StartCoroutine(DestroyDelay());
             }
         });
-        while (elapsedTime < 5f)
+        while (elapsedTime < .5f)
         {
-
             yield return null;
+            ghostCloth.SetActive(false);
         }
-
     }
     IEnumerator DestroyDelay()
     {
