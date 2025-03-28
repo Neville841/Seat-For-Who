@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game/Scenes/Bus.unity
     guid: 8899ef59324ce214b97036480fa4a59d
+  - enabled: 1
+    path: Assets/Game/Scenes/Cafe.unity
+    guid: 3f8ab9a3f8970974292aba851d11aedb
   m_configObjects: {}

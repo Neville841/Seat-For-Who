@@ -12,7 +12,7 @@ public class DragRagdoll : MonoBehaviour
     bool seatFound = false;
 
     [SerializeField] Rigidbody selectedRb;
-    [SerializeField] LineRenderer lineRenderer;
+    //[SerializeField] LineRenderer lineRenderer;
     [SerializeField] internal Seat selectedSeat;
     [SerializeField] internal CharacterBehaviour character;
 
@@ -31,7 +31,7 @@ public class DragRagdoll : MonoBehaviour
         selectedRb = character.head;
 
         character.OpenRagdoll();
-        lineRenderer.positionCount = 2;
+        //lineRenderer.positionCount = 2;
         isDragging = true;
         selectedRb.isKinematic = true;
         selectedRb.transform.DORotate(new Vector3(-30, 180, 0), .2f);
@@ -42,7 +42,7 @@ public class DragRagdoll : MonoBehaviour
         {
             character.ghostCloth.SetActive(false);
             StartCoroutine(AnimatorActivate());
-            lineRenderer.positionCount = 0;
+            //lineRenderer.positionCount = 0;
             isDragging = false;
             selectedRb.isKinematic = false;
         }
@@ -66,8 +66,9 @@ public class DragRagdoll : MonoBehaviour
              selectedRb.MovePosition(Vector3.Lerp(selectedRb.position, targetPosition, Time.fixedDeltaTime * followSpeed));
 
              // LineRenderer güncelle
-             lineRenderer.SetPosition(0, selectedRb.position); // Çizginin baþlangýcý hips konumu
-             lineRenderer.SetPosition(1, GetMouseRaycastHit()); // Çizginin ucu mouse pozisyonu
+             //lineRenderer.SetPosition(0, selectedRb.position); // Çizginin baþlangýcý hips konumu
+             //lineRenderer.SetPosition(1, GetMouseRaycastHit()); // Çizginin ucu mouse pozisyonu
+            GetMouseRaycastHit();
          }
     }
 

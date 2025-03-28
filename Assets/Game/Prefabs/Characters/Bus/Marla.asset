@@ -17,4 +17,6 @@ MonoBehaviour:
   characterPrefab: {fileID: 4102495720656634277, guid: ca505a55fe2a4434db33aec23678fd24,
     type: 3}
   seatType: 0
-  infos: []
+  infos:
+  - <link=Marla><u>Marla</u></link><color=#092C50> wants to see the view by the window
+    in her red dress.</color>

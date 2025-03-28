@@ -17,4 +17,6 @@ MonoBehaviour:
   characterPrefab: {fileID: 2124928891397231999, guid: 145d227a300947e428cde9580fcd82ae,
     type: 3}
   seatType: 0
-  infos: []
+  infos:
+  - <link=Rico><u>Rico</u></link><color=#092C50> gets mad if he can't sit in the
+    back corner.</color>

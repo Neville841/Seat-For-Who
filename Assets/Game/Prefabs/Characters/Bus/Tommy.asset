@@ -17,4 +17,6 @@ MonoBehaviour:
   characterPrefab: {fileID: 6361408987721064066, guid: 41d3f0393895cb24ab90d0472edbce29,
     type: 3}
   seatType: 0
-  infos: []
+  infos:
+  - <link=Tommy><u>Tommy</u></link><color=#092C50> is going on a new adventure with
+    his bag.</color>
