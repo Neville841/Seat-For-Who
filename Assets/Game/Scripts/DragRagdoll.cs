@@ -4,6 +4,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.TextCore.Text;
 
 public class DragRagdoll : MonoBehaviour
 {
@@ -40,8 +41,9 @@ public class DragRagdoll : MonoBehaviour
     {
         if (Input.GetMouseButtonUp(0) && character)
         {
-           // character.animatedChar.Play("Fall");
+            // character.animatedChar.Play("Fall");
             //character.ghostCloth.SetActive(false);
+            character.animatedChar.transform.position = new Vector3(0, 100, 0);
             StartCoroutine(AnimatorActivate());
             //lineRenderer.positionCount = 0;
             isDragging = false;

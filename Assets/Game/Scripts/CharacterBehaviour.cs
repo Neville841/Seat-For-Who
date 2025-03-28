@@ -108,8 +108,8 @@ public class CharacterBehaviour : MonoBehaviour
     }
     public IEnumerator BlendToAnimation(Seat seat)
     {
-        animatedChar.Play("Fall");
         animatedChar.transform.position = new Vector3(0, 100, 0);
+        animatedChar.Play("Fall");
         animatedChar.transform.localPosition = Vector3.zero;
         transform.position = hips.transform.position;
         hips.localPosition = Vector3.zero;
