@@ -95,6 +95,7 @@ public class CharacterBehaviour : MonoBehaviour
                     bone.GetComponent<Rigidbody>().isKinematic = true;
                     if (!sit)
                     {
+                        ragdollChar.transform.forward = animatedChar.transform.forward;
                         ragdollChar.enabled = true;
                         ragdollChar.Play("Sit");
                         sit = true;
@@ -111,10 +112,9 @@ public class CharacterBehaviour : MonoBehaviour
         hips.localPosition = Vector3.zero;
         elapsedTime = 0f;
         blending = true;
+        ragdollChar.transform.DOScale(Vector3.one*.9f, 1f);
         transform.DOMove(seat.characterPos.position, 1f).OnComplete(() =>
         {
-            ragdollChar.transform.DOScale(Vector3.one, .2f);
-            ragdollChar.transform.forward = animatedChar.transform.forward;
             blending = false;
             if (seat.seatType != characterSO.SeatType)
             {
